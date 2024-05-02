@@ -9,6 +9,11 @@ import {
 const links = [
   { name: 'Home', href: '/admin', icon: HomeIcon },
   {
+    name: 'Login',
+    href: '/admin/login',
+    icon: UserGroupIcon,
+  },
+  {
     name: 'Groups',
     href: '/admin/groups',
     icon: UserGroupIcon,
@@ -16,6 +21,25 @@ const links = [
   { 
     name: 'Projects', 
     href: '/admin/projects', 
+    icon: DocumentDuplicateIcon
+
+  },
+
+  { 
+    name: 'Members', 
+    href: '/admin/members', 
+    icon: DocumentDuplicateIcon
+  },
+ 
+  { 
+    name: 'Campus', 
+    href: '/admin/campus', 
+    icon: DocumentDuplicateIcon
+  },
+
+  { 
+    name: 'AreaKnowledge', 
+    href: '/admin/areaKnowledge', 
     icon: DocumentDuplicateIcon
   },
 ];
