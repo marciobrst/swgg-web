@@ -7,8 +7,21 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
+import { IGroup, createGroup } from '@/app/lib/mysql';
 
 export default async function Page() {
+
+  // Action
+  async function create(formData: FormData) {
+    'use server';
+    const rawFormData = {
+      group_name: formData.get('grupo')!.toString(),
+      area_conhecimento: formData.get('areaconhec')!.toString(),
+      linha_pesquisa: formData.get('linhapesq')!.toString(),
+    } ;
+    // Test it out:
+    createGroup(rawFormData);
+  }
  
   return (
     <main>
@@ -23,7 +36,7 @@ export default async function Page() {
           },
         ]}
       />
-      <form>
+      <form action={create}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* campo campus */}
         <div className="mb-4">
