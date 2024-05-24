@@ -1,3 +1,4 @@
+'use client'
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import Link from 'next/link';
 import {
@@ -7,20 +8,20 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
-import { IGroup, createGroup } from '@/app/lib/mysql';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default async function Page() {
 
+  const { data, mutate } = useSWR('/api/groups', fetcher)
+
   // Action
   async function create(formData: FormData) {
-    'use server';
-    const rawFormData = {
-      group_name: formData.get('grupo')!.toString(),
-      area_conhecimento: formData.get('areaconhec')!.toString(),
-      linha_pesquisa: formData.get('linhapesq')!.toString(),
-    } ;
-    // Test it out:
-    createGroup(rawFormData);
+    let name : string = formData.get('grupo')!.toString();
+    let area_conhecimento : string = formData.get('areaconhec')!.toString();
+    let linha_pesquisa : string = formData.get('linhapesq')!.toString();
+    mutate({ name, area_conhecimento, linha_pesquisa })
   }
  
   return (

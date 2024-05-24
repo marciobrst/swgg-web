@@ -6,9 +6,9 @@ import { RowDataPacket } from "mysql2"
 
 export interface IGroup extends RowDataPacket {
     id?: number
-    group_name?: string
-    area_conhecimento?: string
-    linha_pesquisa?: string
+    name: string
+    area_conhecimento: string
+    linha_pesquisa: string
 }
 
 function getConnection() {
@@ -21,7 +21,7 @@ function getConnection() {
   });
 }
 
-export async function fetchGroups(): Promise<IGroup[]> {
+export async function getGroups(): Promise<IGroup[]> {
   
     try {
         
@@ -40,7 +40,7 @@ export async function fetchGroups(): Promise<IGroup[]> {
   export async function readById(user_id: number): Promise<IGroup | undefined> {
     return new Promise((resolve, reject) => {
       getConnection().query<IGroup[]>(
-        "SELECT * FROM users WHERE id = ?",
+        "SELECT * FROM groups WHERE id = ?",
         [user_id],
         (err: any, res: any) => {
           if (err) reject(err)
@@ -50,11 +50,11 @@ export async function fetchGroups(): Promise<IGroup[]> {
     })
   }
 
-  export async function createGroup(group: IGroup): Promise<IGroup> {
+  export async function createGroup(name: String): Promise<IGroup> {
     return new Promise((resolve, reject) => {
       getConnection().query<OkPacket>(
-        "INSERT INTO users (name, area_conhecimento, linha_pesquisa) VALUES(?,?,?)",
-        [group.name, group.area_conhecimento, group.linha_pesquisa],
+        "INSERT INTO groups (name) VALUES(?)",
+        [name],
         (err: any, res: any) => {
           if (err) reject(err)
           else
