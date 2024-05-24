@@ -65,3 +65,19 @@ export async function getGroups(): Promise<IGroup[]> {
       )
     })
   }
+
+  export async function updateGroup(id: number, name: String, area_conhecimento: String, linha_pesquisa: String): Promise<IGroup> {
+    return new Promise((resolve, reject) => {
+      getConnection().query<OkPacket>(
+        "UPDATE groups SET name = ?, area_conhecimento = ?, linha_pesquisa = ?  where id = ?",
+        [name, area_conhecimento, linha_pesquisa, id],
+        (err: any, res: any) => {
+          if (err) reject(err)
+          else
+            readById(id)
+              .then(group => resolve(group!))
+              .catch(reject)
+        }
+      )
+    })
+  }
