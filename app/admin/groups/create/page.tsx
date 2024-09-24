@@ -1,3 +1,5 @@
+'use client'
+
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import Link from 'next/link';
 import {
@@ -7,8 +9,30 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
+import { useState } from 'react';
 
-export default async function Page() {
+export default function Page() {
+
+  const [nome, setNome] = useState("")
+
+  function salvarGrupo(nome) {
+    fetch('http://localhost:8080/v1/grupos', {
+      method: 'POST',
+      body: JSON.stringify({"nome": nome}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+        alert("Sucesso");
+    });    
+  }
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    salvarGrupo(nome);
+  };
  
   return (
     <main>
@@ -23,7 +47,7 @@ export default async function Page() {
           },
         ]}
       />
-      <form>
+      <form onSubmit={handleSubmit}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* campo campus */}
         <div className="mb-4">
@@ -51,7 +75,9 @@ export default async function Page() {
               <input
                 id="grupo"
                 name="grupo"
-                type="text"              
+                type="text"   
+                value={nome}     
+                onChange={(e) => setNome(e.target.value)}      
                 placeholder="Digite aqui"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />

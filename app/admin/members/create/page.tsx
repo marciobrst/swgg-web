@@ -215,12 +215,12 @@ export default async function Page() {
                 id="sim"
                 name="sim"
                 type="radio"              
-             name="nao" value="sim"/> Sim<br />
+                value="sim"/> Sim<br />
              <input
                 id="nao"
                 name="nao"
                 type="radio"              
-              value="sim"/> Não<br 
+                value="sim"/> Não<br 
 
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
