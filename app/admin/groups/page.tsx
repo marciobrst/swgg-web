@@ -11,6 +11,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { useEffect, useState } from 'react';
 
+
 export type GrupoType = {
   id: string
   nome: string
@@ -69,6 +70,24 @@ export default function Page() {
           
         </tbody>
       </table>
+      <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeader>Name</TableHeader>
+          <TableHeader>Email</TableHeader>
+          <TableHeader>Role</TableHeader>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {users.map((user) => (
+          <TableRow key={user.handle}>
+            <TableCell className="font-medium">{user.name}</TableCell>
+            <TableCell>{user.email}</TableCell>
+            <TableCell className="text-zinc-500">{user.access}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
     </main>
   );
 }

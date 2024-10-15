@@ -10,8 +10,11 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+
+  const router = useRouter();
 
   const [nome, setNome] = useState("")
 
@@ -27,7 +30,7 @@ export default function Page() {
       }
     })
     .then(() => {
-        alert("Sucesso");
+        router.push("/admin/groups");
     });    
   }
 
