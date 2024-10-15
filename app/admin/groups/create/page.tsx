@@ -15,10 +15,13 @@ export default function Page() {
 
   const [nome, setNome] = useState("")
 
-  function salvarGrupo(nome) {
+  function salvarGrupo() {
+    const data = {
+      "nome": nome
+    }
     fetch('http://localhost:8080/v1/grupos', {
       method: 'POST',
-      body: JSON.stringify({"nome": nome}),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -31,7 +34,7 @@ export default function Page() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    salvarGrupo(nome);
+    salvarGrupo();
   };
  
   return (

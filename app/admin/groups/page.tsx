@@ -11,9 +11,14 @@ import {
 import { Button } from '@/app/ui/button';
 import { useEffect, useState } from 'react';
 
+export type GrupoType = {
+  id: string
+  nome: string
+}
+
 export default function Page() {
 
-  const [groups, setGroups] = useState([])
+  const [groups, setGroups] = useState(new Array<GrupoType>())
 
   function fetchGroups() {
     fetch('http://localhost:8080/v1/grupos')
